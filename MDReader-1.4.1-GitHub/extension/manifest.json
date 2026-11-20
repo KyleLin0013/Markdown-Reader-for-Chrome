@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "MD Reader",
+  "version": "1.4.1",
+  "description": "轻量 Markdown 阅读器：同文件夹文档切换、跨文件锚点、中文目录与舒适配色。",
+  "permissions": ["storage"],
+  "host_permissions": ["file:///*"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_popup": "popup.html", "default_title": "MD Reader" },
+  "content_scripts": [{
+    "matches": ["file:///*"],
+    "js": ["reader.js"],
+    "css": ["reader.css"],
+    "run_at": "document_idle"
+  }, {
+    "matches": ["http://*/*", "https://*/*"],
+    "include_globs": ["*.md*", "*.MD*", "*.markdown*", "*.MARKDOWN*", "*.mdown*", "*.MDOWN*"],
+    "js": ["reader.js"],
+    "css": ["reader.css"],
+    "run_at": "document_idle"
+  }]
+}
